@@ -1,23 +1,36 @@
 package com.example.democomponentsinandroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var textView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
         logLifeCycle("onCreate")
+
+        textView = findViewById(R.id.textView)
+        textView.setOnClickListener {
+//            startActivity(Intent(this, DialogActivity::class.java))
+            startActivity(Intent(this, SecondActivity::class.java))
+            finish()
+
+//            // phai la 1 activity dialog thi moi co the che di 1 activity khac -> k the roi vao callback onPause
+//            AlertDialog.Builder(this)
+//                .setTitle("Demo")
+//                .setMessage("Demo")
+//                .setPositiveButton("OK") {_, _ -> }
+//                .setNegativeButton("Cancel") {_, _ ->}
+//                .show()
+        }
     }
 
     override fun onStart() {
