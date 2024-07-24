@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,17 +17,25 @@
         android:theme="@style/Theme.DemoComponentsInAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".service.DemoServiceActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.MyForegroundService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false" />
+
+        <activity
             android:name=".lifecycle.SecondActivity"
             android:exported="false" />
         <activity
             android:name=".lifecycle.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".lifecycle.DialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
