@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
     <application
@@ -27,15 +27,20 @@
 
         <service
             android:name=".service.MyForegroundService"
-            android:foregroundServiceType="mediaPlayback"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <service
+            android:name=".service.MyBoundService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
         <activity
             android:name=".lifecycle.SecondActivity"
             android:exported="false" />
         <activity
             android:name=".lifecycle.MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".lifecycle.DialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />

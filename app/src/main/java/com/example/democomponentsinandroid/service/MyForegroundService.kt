@@ -13,6 +13,7 @@ import com.example.democomponentsinandroid.R
 
 
 class MyForegroundService : Service() {
+    // return null thi k su dung bound service
     override fun onBind(intent: Intent?) = null
 
     override fun onCreate() {
