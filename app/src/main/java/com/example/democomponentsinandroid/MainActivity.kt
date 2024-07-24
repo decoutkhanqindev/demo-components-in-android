@@ -7,30 +7,45 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.democomponentsinandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var textView: TextView
+    private lateinit var binding: ActivityMainBinding
+    private var count: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         logLifeCycle("onCreate")
 
-        textView = findViewById(R.id.textView)
-        textView.setOnClickListener {
-//            startActivity(Intent(this, DialogActivity::class.java))
-            startActivity(Intent(this, SecondActivity::class.java))
-            finish()
 
-//            // phai la 1 activity dialog thi moi co the che di 1 activity khac -> k the roi vao callback onPause
-//            AlertDialog.Builder(this)
-//                .setTitle("Demo")
-//                .setMessage("Demo")
-//                .setPositiveButton("OK") {_, _ -> }
-//                .setNegativeButton("Cancel") {_, _ ->}
-//                .show()
+//        binding.textView.setOnClickListener {
+////            startActivity(Intent(this, DialogActivity::class.java))
+//            startActivity(Intent(this, SecondActivity::class.java))
+//
+////            // phai la 1 activity dialog thi moi co the che di 1 activity khac -> k the roi vao callback onPause
+////            AlertDialog.Builder(this)
+////                .setTitle("Demo")
+////                .setMessage("Demo")
+////                .setPositiveButton("OK") {_, _ -> }
+////                .setNegativeButton("Cancel") {_, _ ->}
+////                .show()
+//        }
+
+        if (savedInstanceState != null) {
+            count = savedInstanceState.getInt("count")
         }
+
+        binding.btn.setOnClickListener {
+            count++
+            binding.textView.text = "click $count times"
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("count", count)
     }
 
     override fun onStart() {
