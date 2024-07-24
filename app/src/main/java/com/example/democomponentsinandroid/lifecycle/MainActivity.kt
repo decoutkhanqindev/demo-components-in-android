@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         logLifeCycle("onCreate")
 
-
 //        binding.textView.setOnClickListener {
 ////            startActivity(Intent(this, DialogActivity::class.java))
 //            startActivity(Intent(this, SecondActivity::class.java))
