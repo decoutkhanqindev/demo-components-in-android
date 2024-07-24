@@ -15,9 +15,15 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        count = intent.getIntExtra("count", 0)
-        person = intent.getParcelableExtra<Person>("person") as Person
-//        binding.textView.text = "count from main activity $count"
-        binding.textView.text = "person from main activity $person"
+//        count = intent.getIntExtra("count", 0)
+//        person = intent.getParcelableExtra<Person>("person") as Person
+////        binding.textView.text = "count from main activity $count"
+//        binding.textView.text = "person from main activity $person"
+
+        val messageBody = intent.getStringExtra("messageBody")
+        val messageAddress = intent.getStringExtra("messageAddress")
+
+        binding.textView1.text = messageBody
+        binding.textView2.text = messageAddress
     }
 }
