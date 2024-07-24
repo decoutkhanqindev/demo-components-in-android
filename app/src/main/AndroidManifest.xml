@@ -13,7 +13,10 @@
         android:theme="@style/Theme.DemoComponentsInAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".lifecycle.SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name=".lifecycle.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,12 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".DialogActivity"
-            android:theme="@style/Theme.AppCompat.Dialog"/>
-
-        <activity android:name=".SecondActivity"/>
+            android:name=".lifecycle.DialogActivity"
+            android:theme="@style/Theme.AppCompat.Dialog" />
     </application>
 
 </manifest>

@@ -1,11 +1,8 @@
-package com.example.democomponentsinandroid
+package com.example.democomponentsinandroid.lifecycle
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.democomponentsinandroid.databinding.ActivityMainBinding
 
@@ -33,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 ////                .show()
 //        }
 
+        binding.textView.text = "click $count times"
+
         if (savedInstanceState != null) {
             count = savedInstanceState.getInt("count")
         }
@@ -40,6 +39,12 @@ class MainActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             count++
             binding.textView.text = "click $count times"
+        }
+
+        binding.btn1.setOnClickListener {
+            startActivity(Intent(this, SecondActivity::class.java).apply {
+                putExtra("count", count)
+            })
         }
     }
 
