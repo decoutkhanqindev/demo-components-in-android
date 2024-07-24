@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         binding.btn1.setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java).apply {
                 putExtra("count", count)
+                putExtra("person", Person("1", "Khang"))
             })
         }
     }
