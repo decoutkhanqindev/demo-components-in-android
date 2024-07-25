@@ -42,7 +42,7 @@ class StudentsContentProvider: ContentProvider() {
     private lateinit var databaseHelper: StudentDatabaseHelper
 
     override fun onCreate(): Boolean {
-         databaseHelper = StudentDatabaseHelper(context!!)
+        databaseHelper = StudentDatabaseHelper(context!!)
         return true
     }
 

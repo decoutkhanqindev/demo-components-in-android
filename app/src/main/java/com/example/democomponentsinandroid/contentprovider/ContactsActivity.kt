@@ -41,16 +41,16 @@ class ContactsActivity : AppCompatActivity() {
             readContactsPermissionLauncher.launch(android.Manifest.permission.READ_CONTACTS)
         }
 
+        // demo students content provider
         binding.textView.setOnClickListener {
             contentResolver.insert(
                 /* url = */ StudentsContentProvider.CONTENT_URI,
                 /* values = */ contentValuesOf(StudentsContentProvider.COLUMN_NAME to "Student ${System.currentTimeMillis()}")
                 ).let {
-                    Log.d("ContactsActivity", "Inserted student: $it")
-                }
+                Log.d("ContactsActivity", "Inserted student: $it")
+            }
         }
 
-        // demo students content provider
         contentResolver.registerContentObserver(
             /* uri = */ StudentsContentProvider.CONTENT_URI,
             /* notifyForDescendants = */ false,
