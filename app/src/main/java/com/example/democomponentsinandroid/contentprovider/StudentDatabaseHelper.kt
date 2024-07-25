@@ -35,8 +35,7 @@ class StudentDatabaseHelper(
     }
 
     // update version old to new
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-    }
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 }
 
 class StudentsContentProvider: ContentProvider() {
@@ -75,7 +74,7 @@ class StudentsContentProvider: ContentProvider() {
         return "vnd.android.cursor.dir/$AUTHORITY.students"
     }
 
-    override fun insert(uri: Uri, values: ContentValues?): Uri? {
+    override fun insert(uri: Uri, values: ContentValues?): Uri {
         val db = databaseHelper.writableDatabase
         val rowId = db.insert(
             /* table = */ StudentDatabaseHelper.TABLE_NAME,
@@ -104,5 +103,7 @@ class StudentsContentProvider: ContentProvider() {
     companion object {
         private const val AUTHORITY = "com.student.contentProvider"
         val CONTENT_URI = Uri.parse("content://$AUTHORITY/students")!!
+        const val COLUMN_ID = StudentDatabaseHelper.COLUMN_ID
+        const val COLUMN_NAME = StudentDatabaseHelper.COLUMN_NAME
     }
 }

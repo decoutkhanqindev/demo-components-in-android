@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.contentValuesOf
+import androidx.core.database.getLongOrNull
 import androidx.core.database.getStringOrNull
 import com.example.democomponentsinandroid.databinding.ActivityContactsBinding
 
@@ -22,7 +24,6 @@ class ContactsActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            // read contacts
             readContacts()
         } else {
             Toast.makeText(this, "Denied Permission", Toast.LENGTH_LONG).show()
@@ -33,16 +34,34 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.READ_CONTACTS
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             readContacts()
         } else {
             //  dialog xin quyen
             readContactsPermissionLauncher.launch(android.Manifest.permission.READ_CONTACTS)
         }
+
+        binding.textView.setOnClickListener {
+            contentResolver.insert(
+                /* url = */ StudentsContentProvider.CONTENT_URI,
+                /* values = */ contentValuesOf(StudentsContentProvider.COLUMN_NAME to "Student ${System.currentTimeMillis()}")
+                ).let {
+                    Log.d("ContactsActivity", "Inserted student: $it")
+                }
+        }
+
+        // demo students content provider
+        contentResolver.registerContentObserver(
+            /* uri = */ StudentsContentProvider.CONTENT_URI,
+            /* notifyForDescendants = */ false,
+            /* observer = */ object : android.database.ContentObserver(null) {
+                override fun onChange(selfChange: Boolean) {
+                    super.onChange(selfChange)
+                    queryStudents()
+                    Log.d("ContactsActivity", "$selfChange")
+                }
+            }
+        )
     }
 
     private fun readContacts() {
@@ -82,6 +101,26 @@ class ContactsActivity : AppCompatActivity() {
         }
         // cursor is closed
         Log.d("ContactsActivity", "Cursor is closed: ${cursor?.isClosed}")
+    }
+
+    private fun queryStudents() {
+        val cursor = contentResolver.query(
+            /* uri = */ StudentsContentProvider.CONTENT_URI,
+            /* projection = */ arrayOf(StudentsContentProvider.COLUMN_ID, StudentsContentProvider.COLUMN_NAME),
+            /* selection = */ null,
+            /* selectionArgs = */ null,
+            /* sortOrder = */ "${StudentsContentProvider.COLUMN_ID} ASC"
+        )
+
+        cursor?.use {
+            Log.d("ContactsActivity","Start Query Students\n")
+            while(cursor.moveToNext()) {
+                val id = cursor.getLongOrNull(cursor.getColumnIndexOrThrow(StudentsContentProvider.COLUMN_ID))
+                val name = cursor.getStringOrNull(cursor.getColumnIndexOrThrow(StudentsContentProvider.COLUMN_NAME))
+                Log.d("ContactsActivity","id=$id, name=$name\n")
+            }
+            Log.d("ContactsActivity","End Query Students")
+        }
     }
 }
 
