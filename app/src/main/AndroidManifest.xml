@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
+<!--    <uses-permission android:name="android.permission.RECEIVE_SMS" />-->
+<!--    <uses-permission android:name="android.permission.READ_SMS" />-->
 
     <application
         android:allowBackup="true"
@@ -19,25 +19,33 @@
         android:theme="@style/Theme.DemoComponentsInAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".broadcastreceiver.DemoBroadCastReceiver"
+            android:name=".contentprovider.ContactsActivity"
             android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".broadcastreceiver.SMSBroadCastReceiver"
+        <activity
+            android:name=".broadcastreceiver.DemoBroadCastReceiver"
+            android:exported="false">
+        </activity>
+
+        <receiver
+            android:name=".broadcastreceiver.SMSBroadCastReceiver"
             android:exported="true"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".service.DemoServiceActivity"
             android:exported="false" />
+
         <service
             android:name=".service.MyForegroundService"
             android:exported="false"
