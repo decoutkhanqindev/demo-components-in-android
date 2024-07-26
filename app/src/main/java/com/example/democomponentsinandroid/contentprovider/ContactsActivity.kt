@@ -1,8 +1,10 @@
 package com.example.democomponentsinandroid.contentprovider
 
 import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
@@ -18,6 +20,10 @@ import com.example.democomponentsinandroid.databinding.ActivityContactsBinding
 class ContactsActivity : AppCompatActivity() {
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityContactsBinding.inflate(layoutInflater)
+    }
+
+    companion object {
+        private val URI = Uri.parse("content://com.decoutkhanqindev.student.provider/students")
     }
 
     private val readContactsPermissionLauncher = registerForActivityResult(
@@ -42,12 +48,28 @@ class ContactsActivity : AppCompatActivity() {
         }
 
         // demo students content provider
+//        binding.textView.setOnClickListener {
+//            contentResolver.insert(
+//                /* url = */ StudentsContentProvider.CONTENT_URI,
+//                /* values = */ contentValuesOf(StudentsContentProvider.COLUMN_NAME to "Student ${System.currentTimeMillis()}")
+//                ).let {
+//                Log.d("ContactsActivity", "Inserted student: $it")
+//            }
+//        }
+
+        // demo my students content provider
         binding.textView.setOnClickListener {
-            contentResolver.insert(
-                /* url = */ StudentsContentProvider.CONTENT_URI,
-                /* values = */ contentValuesOf(StudentsContentProvider.COLUMN_NAME to "Student ${System.currentTimeMillis()}")
-                ).let {
-                Log.d("ContactsActivity", "Inserted student: $it")
+            val cursor = contentResolver.query(URI, arrayOf("id", "name"), null, null, "id ASC")
+            cursor?.use {
+                while (cursor.moveToNext()) {
+                    Log.d("ContactsActivity","Start Query Students\n")
+                    while(cursor.moveToNext()) {
+                        val id = cursor.getLongOrNull(cursor.getColumnIndexOrThrow("id"))
+                        val name = cursor.getStringOrNull(cursor.getColumnIndexOrThrow("name"))
+                        Log.d("ContactsActivity","id=$id, name=$name\n")
+                    }
+                    Log.d("ContactsActivity","End Query Students")
+                }
             }
         }
 
