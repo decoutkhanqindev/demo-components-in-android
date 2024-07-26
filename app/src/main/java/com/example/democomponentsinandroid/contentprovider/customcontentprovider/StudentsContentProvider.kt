@@ -16,10 +16,10 @@ class StudentsContentProvider : ContentProvider() {
 
     companion object {
         // Authority of the content provider
-        private const val PROVIDER_NAME = "com.decoutkhanqindev.student.provider"
+        private const val AUTHORITY = "com.decoutkhanqindev.student.provider"
 
         // Content URI
-        private const val URL = "content://$PROVIDER_NAME/students"
+        private const val URL = "content://$AUTHORITY/students"
         val CONTENT_URI: Uri = Uri.parse(URL)
 
         // Constants for database
@@ -38,8 +38,8 @@ class StudentsContentProvider : ContentProvider() {
         // URI matching codes
         private const val URI_CODE = 1
         private val uriMatcher: UriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
-            addURI(PROVIDER_NAME, "students", URI_CODE)
-            addURI(PROVIDER_NAME, "students/*", URI_CODE)
+            addURI(AUTHORITY, "students", URI_CODE)
+            addURI(AUTHORITY, "students/*", URI_CODE)
         }
     }
 
