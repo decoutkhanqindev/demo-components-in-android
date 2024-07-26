@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="com.decoutkhanqindev.student.provider"
+            android:name=".contentprovider.customcontentprovider.StudentsContentProvider"
+            android:exported="false" />
+        
         <activity
             android:name=".contentprovider.ContactsActivity"
             android:exported="false"/>

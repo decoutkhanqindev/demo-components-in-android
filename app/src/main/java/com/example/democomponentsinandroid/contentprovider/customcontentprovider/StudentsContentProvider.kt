@@ -25,11 +25,13 @@ class StudentsContentProvider : ContentProvider() {
         // Constants for database
         private const val DB_NAME = "my_students_db"
         private const val TABLE_NAME = "my_students_tb"
+        internal const val COLUMN_ID = "id"
+        internal const val COLUMN_NAME = "name"
         private const val DB_VERSION = 1
         private const val CREATE_DB_TABLE = """
             CREATE TABLE $TABLE_NAME (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL
+                $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_NAME TEXT NOT NULL
             );
         """
 
@@ -98,10 +100,7 @@ class StudentsContentProvider : ContentProvider() {
     }
 
     override fun update(
-        uri: Uri,
-        values: ContentValues?,
-        selection: String?,
-        selectionArgs: Array<out String>?
+        uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<out String>?
     ): Int {
         val count = when (uriMatcher.match(uri)) {
             URI_CODE -> db!!.update(TABLE_NAME, values, selection, selectionArgs)

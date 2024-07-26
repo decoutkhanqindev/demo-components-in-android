@@ -40,7 +40,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="40dp"
-            android:hint="@string/hintText" />
+            android:hint="@string/hintText"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/insertButton"
@@ -55,7 +58,37 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/textID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
+            android:hint="@string/hintTextToDelete"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="#4CAF50"
+            android:text="@string/deleteButtonText"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/loadButton"
@@ -70,10 +103,12 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
 
         <TextView
-            android:id="@+id/res"
+            android:id="@+id/result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
