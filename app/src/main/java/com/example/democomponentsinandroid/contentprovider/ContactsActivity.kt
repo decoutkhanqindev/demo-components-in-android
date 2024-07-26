@@ -1,7 +1,6 @@
 package com.example.democomponentsinandroid.contentprovider
 
 import android.content.ContentResolver
-import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
@@ -12,7 +11,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.contentValuesOf
 import androidx.core.database.getLongOrNull
 import androidx.core.database.getStringOrNull
 import com.example.democomponentsinandroid.databinding.ActivityContactsBinding
